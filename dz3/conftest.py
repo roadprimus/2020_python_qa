@@ -4,7 +4,14 @@ import pytest
 
 def pytest_generate_tests(metafunc):
     ds = DataStore()
-    fixtures = ('input_dict', 'input_list', 'input_set', 'input_value')
+    fixtures = (
+        'input_dict',
+        'input_item',
+        'input_list',
+        'input_set',
+        'input_hash_value',
+        'input_value'
+    )
     
     for name in fixtures:
         if name in metafunc.fixturenames:
