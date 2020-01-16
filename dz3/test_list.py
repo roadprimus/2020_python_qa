@@ -4,11 +4,6 @@
 import pytest
 
 
-input_list = ([], [6, 3, 8, 0], [1, 2, 3, 10], [1, 2], ['a', None])
-input_value = (1, 2, 3, 10, None, [])
-
-
-@pytest.mark.parametrize("input_list", input_list)
 class TestListMethodsWoutItemArgs:
     def test_clear(self, input_list):
         """
@@ -45,8 +40,6 @@ class TestListMethodsWoutItemArgs:
             'Ожидаемый и полученный списки различаются.'
 
 
-@pytest.mark.parametrize("input_list", input_list)
-@pytest.mark.parametrize("input_value", input_value)
 class TestListMethodsWithItemArgs:
     """
     Класс с тестами для структуры данных List.

@@ -6,17 +6,6 @@ from itertools import combinations
 import pytest
 
 
-input_set = (
-    set([]),
-    set([6, 3, 8, 0]),
-    set([1, 2, 3, 10]),
-    set([1, 2]),
-    set(['a', None])
-)
-input_value = (1, 2, 3, 10, None, [])
-
-
-@pytest.mark.parametrize("input_set", input_set)
 class TestSetMethodsWoutItemArgs:
     def test_clear(self, input_set):
         """
@@ -72,8 +61,6 @@ class TestSetMethodsWoutItemArgs:
             'Полученного множества нет среди ожидаемых множеств.'
 
 
-@pytest.mark.parametrize("input_set", input_set)
-@pytest.mark.parametrize("input_value", input_value)
 class TestSetMethodsWithItemArgs:
     """
     Класс с тестами для структуры данных Add.
@@ -91,7 +78,6 @@ class TestSetMethodsWithItemArgs:
                   изменитья;
             - Нет:
                 - Проевряю совпадение полученного и ожидаемого множеств;
-                - Проверяю увеличение длины полученного множества на 1.
 
         :param input_set: Исходное множество.
         :param input_value: Добавляемое значение во множество.
@@ -107,8 +93,6 @@ class TestSetMethodsWithItemArgs:
         else:
             assert input_set == expected_set,\
                 'Полученное множество не совпадает с ожидаемым множеством.'
-            assert len(input_set) == initial_len + 1,\
-                'Не пройден тест длины множества.'
 
     def test_discard(self, input_set, input_value):
         """
