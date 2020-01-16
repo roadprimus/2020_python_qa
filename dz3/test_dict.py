@@ -60,9 +60,10 @@ class TestDictMethodsWoutItemArgs:
             'Ожидаемый и полученный результат различаются.'
 
 
-class TestListMethodsWithItemArgs:
+class TestDictMethodsWithItemArgs:
     """
-    Класс с тестами для структуры данных Dict.
+    Тесты методов словаря, для которых нужны дополнительные параметры,
+    кроме самого словаря.
     """
     def test_pop(self, input_dict, input_hash_value):
         """
