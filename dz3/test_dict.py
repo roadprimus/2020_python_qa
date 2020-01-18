@@ -91,7 +91,7 @@ class TestDictMethodsWithItemArgs:
         """
         initial_len = len(input_dict)
         expected_dict, expected_value = (
-            self._get_dict_after_pop(input_dict, input_hash_value))
+            self._pop(input_dict, input_hash_value))
 
         try:
             result_value = input_dict.pop(input_hash_value)
@@ -115,7 +115,7 @@ class TestDictMethodsWithItemArgs:
         :param input_dict: Исходный словарь.
         :param input_item: Кортеж, пара ключ-значение.
         """
-        expected_dict = self._get_dict_after_update(input_dict, input_item)
+        expected_dict = self._update(input_dict, input_item)
 
         input_dict.update(dict([input_item]))
 
@@ -123,7 +123,7 @@ class TestDictMethodsWithItemArgs:
             'Полученный и ожидаемый словари не совпадают.'
 
     @staticmethod
-    def _get_dict_after_pop(input_dict, pop_key):
+    def _pop(input_dict, pop_key):
         """
         Имитация стандартного метода pop в словаре.
 
@@ -147,7 +147,7 @@ class TestDictMethodsWithItemArgs:
         return result, value
 
     @staticmethod
-    def _get_dict_after_update(input_dict, item):
+    def _update(input_dict, item):
         """
         Возвращает исходный словарь с добавленной парой ключ-значение.
 

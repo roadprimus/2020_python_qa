@@ -90,7 +90,7 @@ class TestSetMethodsWithItemArgs:
         :param input_value: Добавляемое значение во множество.
         """
         initial_len = len(input_set)
-        expected_set = self._get_set_with_added_item(input_set, input_value)
+        expected_set = self._add(input_set, input_value)
 
         try:
             input_set.add(input_value)
@@ -113,7 +113,7 @@ class TestSetMethodsWithItemArgs:
         :param input_value: Удаляемый элемент множества.
 
         """
-        expected_set = self._discard_item_from_set(input_set, input_value)
+        expected_set = self._discard(input_set, input_value)
 
         try:
             input_set.discard(input_value)
@@ -141,7 +141,7 @@ class TestSetMethodsWithItemArgs:
         :param input_value: Удаляемое значение из множества.
         """
         initial_len = len(input_set)
-        expected_set = self._get_set_wout_rm_value(input_set, input_value)
+        expected_set = self._remove(input_set, input_value)
 
         try:
             input_set.remove(input_value)
@@ -155,7 +155,7 @@ class TestSetMethodsWithItemArgs:
                 'Не пройден тест длины списка.'
 
     @staticmethod
-    def _discard_item_from_set(input_set, item):
+    def _discard(input_set, item):
         """
         Удаляет элемент из множества, если он находится во множестве.
 
@@ -172,7 +172,7 @@ class TestSetMethodsWithItemArgs:
         return result
 
     @staticmethod
-    def _get_set_with_added_item(input_set, item):
+    def _add(input_set, item):
         """
         Функция имитирует добавление элемента во множество.
 
@@ -190,7 +190,7 @@ class TestSetMethodsWithItemArgs:
         return result
 
     @staticmethod
-    def _get_set_wout_rm_value(input_set, item):
+    def _remove(input_set, item):
         """
         Удаляет элемент из множества, если такой элемент есть в нём.
 

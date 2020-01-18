@@ -87,8 +87,7 @@ class TestListMethodsWithItemArgs:
         :param input_value: Добавляемое значение в список.
 
         """
-        expected_count = (
-            self._get_count_of_item_in_list(input_list, input_value))
+        expected_count = self._count(input_list, input_value)
 
         result_count = input_list.count(input_value)
 
@@ -114,8 +113,7 @@ class TestListMethodsWithItemArgs:
         :param input_value: Удаляемое значение из списка.
         """
         initial_len = len(input_list)
-        expected_list = (
-            self._get_list_wout_first_rm_value(input_list, input_value))
+        expected_list = self._remove(input_list, input_value)
 
         try:
             input_list.remove(input_value)
@@ -129,7 +127,7 @@ class TestListMethodsWithItemArgs:
                 'Не пройден тест длины списка.'
 
     @staticmethod
-    def _get_list_wout_first_rm_value(lst, rm_value):
+    def _remove(lst, rm_value):
         """
         Имитация метода remove у списка.
 
@@ -155,7 +153,7 @@ class TestListMethodsWithItemArgs:
         return list_wout_first_rm_value
 
     @staticmethod
-    def _get_count_of_item_in_list(lst, item):
+    def _count(lst, item):
         """
         Функция возвращает количество элементов item в списке lst.
 
