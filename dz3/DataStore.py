@@ -19,8 +19,8 @@ class DataStore:
         """
         Генерирует список со случайно заполненными словарями.
         """
-        keys_letters = self._get_hash_values()
-        values_letters = self._get_values()
+        keys_letters = self._hash_values()
+        values_letters = self._values()
 
         return [
             {
@@ -34,8 +34,8 @@ class DataStore:
         """
         Генерирует список кортежей с двумя элементами.
         """
-        keys = self._get_hash_values()
-        values = self._get_values()
+        keys = self._hash_values()
+        values = self._values()
 
         return [
             (choice(keys), choice(values)) for _ in self._range_count_items()
@@ -46,7 +46,7 @@ class DataStore:
         """
         Генерирует список со случайно заполненными списками.
         """
-        letters = self._get_values()
+        letters = self._values()
 
         return [
             [
@@ -59,7 +59,7 @@ class DataStore:
         """
         Генерирует список со случайно заполненными множествами.
         """
-        letters = self._get_hash_values()
+        letters = self._hash_values()
 
         return [
             {
@@ -68,11 +68,25 @@ class DataStore:
         ]
 
     @property
+    def input_string(self):
+        """
+        Генерирует список случайных строк.
+        """
+        return self._lst_random_string()
+
+    @property
+    def input_str_value(self):
+        """
+        Генерирует список случайных строк.
+        """
+        return self._lst_random_string()
+
+    @property
     def input_hash_value(self):
         """
         Генерирует список со случайными hashable значениями.
         """
-        values = self._get_hash_values()
+        values = self._hash_values()
 
         return [choice(values) for _ in self._range_count_items()]
 
@@ -81,9 +95,28 @@ class DataStore:
         """
         Генерирует список со случайными значениями.
         """
-        values = self._get_values()
+        values = self._values()
 
         return [choice(values) for _ in self._range_count_items()]
+
+    def _lst_random_string(self, with_punctuation=False):
+        """
+        Генерирует список случайных строк.
+        
+        :params with_punctuation: Возвращаемая строка может содержать символы
+            пунктуации.
+        :return: Список случайных строк
+        """
+        letters = (
+            self._letters()
+            if with_punctuation else self._letters_wout_punctuation()
+        )
+
+        return [
+            ''.join([
+                choice(letters) for _ in self._range_count_in_struct()
+            ]) for _ in self._range_count_items()
+        ]
 
     def _range_count_items(self):
         """
@@ -99,19 +132,35 @@ class DataStore:
         return range(
             randint(self.MIN_COUNT_IN_STRUCT, self.MAX_COUNT_IN_STRUCT))
 
-    def _get_values(self):
+    def _values(self):
         """
         Возвращает список с hashable значениями и не только.
         """
-        hash_values = self._get_hash_values()
+        hash_values = self._hash_values()
 
         return hash_values + [
             [], {}, set(), [1, 2, 3, 3], {1: 2, 3: 4}, set([1, 2, 3, 4, 5])]
 
-    @staticmethod
-    def _get_hash_values():
+    def _hash_values(self):
         """
         Возвращает список с hashable значениями.
         """
-        return list(ascii_letters + digits +  punctuation) + [None, (1, 2)]
+        return (
+                list(self._letters()) 
+                + ['', None, (1, 2)] 
+                + list(map(int, digits))
+        )
 
+    def _letters(self):
+        """
+        Возвращает строку с различными строковыми символами.
+        """
+        return self._letters_wout_punctuation() + punctuation
+
+    @staticmethod
+    def _letters_wout_punctuation():
+        """
+        Возвращает строку с различными строковыми символами, без символов
+        пунктуации.
+        """
+        return ascii_letters + digits

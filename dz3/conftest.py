@@ -9,6 +9,8 @@ def pytest_generate_tests(metafunc):
         'input_item',
         'input_list',
         'input_set',
+        'input_string',
+        'input_str_value',
         'input_hash_value',
         'input_value'
     )
