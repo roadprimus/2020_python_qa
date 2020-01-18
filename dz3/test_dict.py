@@ -1,13 +1,14 @@
-"""
-Тесты методов Словаря.
-"""
+"""Тесты методов Словаря."""
 
 
 class TestDictMethodsWoutItemArgs:
     """
-    Тесты методов словаря, для которых не нужны дополнительные параметры,
-    кроме самого словаря.
+    Тесты методов словаря.
+
+    Проверяются методы для которых не нужны дополнительные параметры, кроме
+    самого словаря.
     """
+
     def test_clear(self, input_dict):
         """
         Тест метода clear.
@@ -62,9 +63,12 @@ class TestDictMethodsWoutItemArgs:
 
 class TestDictMethodsWithItemArgs:
     """
-    Тесты методов словаря, для которых нужны дополнительные параметры,
-    кроме самого словаря.
+    Тесты методов словаря.
+
+    Проверяются методы для которых нужны дополнительные параметры, кроме
+    самого словаря.
     """
+
     def test_pop(self, input_dict, input_hash_value):
         """
         Тест метода pop.
@@ -84,7 +88,6 @@ class TestDictMethodsWithItemArgs:
 
         :param input_dict: Исходный словарь.
         :param input_hash_value: Удаляемое значение.
-
         """
         initial_len = len(input_dict)
         expected_dict, expected_value = (
@@ -111,9 +114,7 @@ class TestDictMethodsWithItemArgs:
 
         :param input_dict: Исходный словарь.
         :param input_item: Кортеж, пара ключ-значение.
-
         """
-        initial_len = len(input_dict)
         expected_dict = self._get_dict_after_update(input_dict, input_item)
 
         input_dict.update(dict([input_item]))
@@ -124,6 +125,8 @@ class TestDictMethodsWithItemArgs:
     @staticmethod
     def _get_dict_after_pop(input_dict, pop_key):
         """
+        Имитация стандартного метода pop в словаре.
+
         Возвращает исходный словарь без ключа pop_key и значение, которо было
         в исходном словаре по этому ключу.
 
@@ -150,11 +153,10 @@ class TestDictMethodsWithItemArgs:
 
         :param input_dict: Исходный словарь.
         :param item: Ключ-значение, которые нужно добвать в исходный словарь.
-        :return: Исходный словарь с добавленной парой ключ-значение. Если 
+        :return: Исходный словарь с добавленной парой ключ-значение. Если
             ключ уже был в словаре, то его значение перезапишется.
         """
         result = input_dict.copy()
         result[item[0]] = item[1]
 
         return result
-

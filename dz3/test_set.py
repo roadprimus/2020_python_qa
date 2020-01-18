@@ -1,12 +1,15 @@
-"""
-Тесты методов множества.
-"""
+"""Тесты методов множества."""
 from itertools import combinations
-
-import pytest
 
 
 class TestSetMethodsWoutItemArgs:
+    """
+    Тесты методов множества.
+
+    Проверяются методы для которых не нужны дополнительные параметры, кроме
+    самого множества.
+    """
+
     def test_clear(self, input_set):
         """
         Тест метода clear.
@@ -63,8 +66,12 @@ class TestSetMethodsWoutItemArgs:
 
 class TestSetMethodsWithItemArgs:
     """
-    Класс с тестами для структуры данных Add.
+    Тесты методов множества.
+
+    Проверяются методы для которых нужны дополнительные параметры, кроме
+    самого множества.
     """
+
     def test_add(self, input_set, input_value):
         """
         Тест метода add.
@@ -150,8 +157,8 @@ class TestSetMethodsWithItemArgs:
     @staticmethod
     def _discard_item_from_set(input_set, item):
         """
-        Функция имитирует удаление элемента из множества, если он находится
-        во множестве.
+        Удаляет элемент из множества, если он находится во множестве.
+
         :param input_set: Исходное множество.
         :param item: Элемент, которых нужно удалить из исходного множества.
         :return: Результирующее множество, в котором удалён элемент item, если
@@ -186,7 +193,7 @@ class TestSetMethodsWithItemArgs:
     def _get_set_wout_rm_value(input_set, item):
         """
         Удаляет элемент из множества, если такой элемент есть в нём.
-        
+
         :param input_set: Исходное множество.
         :param item: Элемент, которых нужно удалить из исходного множества.
         :return: Результирующее множество, из которого удалён элемент item,
@@ -198,4 +205,3 @@ class TestSetMethodsWithItemArgs:
             return input_set
 
         return input_set - set([item]) if item in input_set else input_set
-

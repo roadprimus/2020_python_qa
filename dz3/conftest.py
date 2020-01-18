@@ -1,8 +1,10 @@
+"""Настройки фикстур для dz3."""
 from dz3.DataStore import DataStore
 import pytest
 
 
 def pytest_generate_tests(metafunc):
+    """Pytest hook для настройки схемы параметризации фикстур."""
     ds = DataStore()
     fixtures = (
         'input_dict',
@@ -14,7 +16,7 @@ def pytest_generate_tests(metafunc):
         'input_hash_value',
         'input_value'
     )
-    
+
     for name in fixtures:
         if name in metafunc.fixturenames:
             metafunc.parametrize(name, getattr(ds, name))
@@ -22,8 +24,5 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture()
 def list_fixture():
-    """
-    Тестовая фикстура.
-    """
+    """Тестовая фикстура."""
     return [1, 2, 3, 2, 4, 5]
-

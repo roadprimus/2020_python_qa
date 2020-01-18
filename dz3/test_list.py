@@ -1,10 +1,14 @@
-"""
-Тесты методов списка.
-"""
-import pytest
+"""Тесты методов списка."""
 
 
 class TestListMethodsWoutItemArgs:
+    """
+    Тесты методов списка.
+
+    Проверяются методы для которых не нужны дополнительные параметры, кроме
+    самого списка.
+    """
+
     def test_clear(self, input_list):
         """
         Тест метода clear.
@@ -42,8 +46,12 @@ class TestListMethodsWoutItemArgs:
 
 class TestListMethodsWithItemArgs:
     """
-    Класс с тестами для структуры данных List.
+    Тесты методов списка.
+
+    Проверяются методы для которых нужны дополнительные параметры, кроме
+    самого списка.
     """
+
     def test_append(self, input_list, input_value):
         """
         Тест метода append.
@@ -63,9 +71,9 @@ class TestListMethodsWithItemArgs:
         input_list.append(input_value)
 
         assert input_list[-1] == input_value,\
-             'Значение не добавлено в конец списка.'
+            'Значение не добавлено в конец списка.'
         assert len(input_list) == initial_len + 1,\
-             'Не пройден тест длины списка.'
+            'Не пройден тест длины списка.'
 
     def test_count(self, input_list, input_value):
         """
@@ -123,6 +131,8 @@ class TestListMethodsWithItemArgs:
     @staticmethod
     def _get_list_wout_first_rm_value(lst, rm_value):
         """
+        Имитация метода remove у списка.
+
         Функция возвращает список без первого встретившегося значения
         rm_value.
 
@@ -160,4 +170,3 @@ class TestListMethodsWithItemArgs:
                 counter += 1
 
         return counter
-

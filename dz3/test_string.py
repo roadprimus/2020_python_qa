@@ -1,14 +1,15 @@
-"""
-Тесты методов Строки.
-"""
+"""Тесты методов Строки."""
 import re
 
 
 class TestStringMethodsWoutItemArgs:
     """
-    Тесты методов строки, для которых не нужны дополнительные параметры, кроме
+    Тесты методов строки.
+
+    Проверяются методы для которых не нужны дополнительные параметры, кроме
     самой строки.
     """
+
     ord_A = ord('A')
     ord_Z = ord('Z')
     ord_a = ord('a')
@@ -61,12 +62,10 @@ class TestStringMethodsWoutItemArgs:
 
         assert expected_string == result_string,\
             'Ожидаемая и полученная сроки различаются.'
-    
+
     @property
     def _delta_a_A(self):
-        """
-        Возвращает разницу между кодам символов 'a' и 'A'.
-        """
+        """Возвращает разницу между кодам символов 'a' и 'A'."""
         return self.ord_a - self.ord_A
 
     def _isalpha(self, input_string):
@@ -135,9 +134,12 @@ class TestStringMethodsWoutItemArgs:
 
 class TestStringMethodsWithItemArgs:
     """
-    Тесты методов строки, для которых нужны дополнительна параметры, кроме
-    самой строки.
+    Тесты методов строки.
+
+    Проверяются методы для которых нужны дополнительные параметры, кроме самой
+    строки.
     """
+
     def test_endswith(self, input_string, input_str_value):
         """
         Тест метода endswith.
@@ -200,8 +202,7 @@ class TestStringMethodsWithItemArgs:
     @staticmethod
     def _endswith(input_string, templ):
         """
-        Проверяет заканчивается ли строка input_string с шаблона
-        input_str_value.
+        Проверяет заканчивается ли строка input_string шаблоном templ.
 
         :param input_string: Исходная строка.
         :param templ: Строка-шаблон.
@@ -216,7 +217,7 @@ class TestStringMethodsWithItemArgs:
             return True
 
         end_input_string = input_string[-len(templ):]
-        
+
         if end_input_string == templ:
             return True
         else:
@@ -226,6 +227,7 @@ class TestStringMethodsWithItemArgs:
     def _split(input_string, templ):
         """
         Проводит разбиение строки input_string по разделителю input_str_value.
+
         Результат возвращается в виде списка подстрок.
 
         :param input_string: Исходная строка.
@@ -252,9 +254,8 @@ class TestStringMethodsWithItemArgs:
             return True
 
         end_input_string = input_string[:len(templ)]
-        
+
         if end_input_string == templ:
             return True
         else:
             return False
-
