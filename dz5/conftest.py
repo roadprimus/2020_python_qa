@@ -12,16 +12,24 @@ def pytest_addoption(parser):
 
 def pytest_generate_tests(metafunc):
     """Pytest hook для настройки схемы параметризации фикстур."""
-    fn = metafunc.config.getoption('fn')
-    data = store[fn]
-    fixtures = [
-        'api_path',
+    data = store
+    fixtures = ['api_path']
+    dog_fxt = [
         'api_random_img',
         'breed_random_img',
         'by_breed',
         'by_sub_breed',
         'list_all_breeds',
     ]
+    obdb_fxt = [
+        'autocomplete',
+        'per_page',
+        'by_type',
+        'get_brewery',
+        'obdb_sort'
+    ]
+    fixtures.extend(dog_fxt)
+    fixtures.extend(obdb_fxt)
     for name in fixtures:
         if name in metafunc.fixturenames:
             metafunc.parametrize(name, data[name])

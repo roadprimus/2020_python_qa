@@ -29,7 +29,6 @@ class BaseTestAPI:
         :return: Объект responce.
         """
         r = requests.get(fxt['url'])
-
         json_pair = Pair(fxt['schema'], r.json())
         self.validate_responce_correct(r, json_pair)
 
