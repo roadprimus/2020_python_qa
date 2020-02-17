@@ -1,9 +1,9 @@
-"""Модуль для тестирования openbrewerydb.org API."""
+"""Модуль для тестирования jsonplaceholdertypicode.com API."""
 from .BaseTestAPI import BaseTestAPI
 
 
-class TestOpenBreweryDB(BaseTestAPI):
-    """Тесты для API сервиса openbrewerydb.org."""
+class TestJsonPlaceholderTypicode(BaseTestAPI):
+    """Тесты для API сервиса jsonplaceholdertypicode.com."""
 
     def test_comments(self, comments):
         """
