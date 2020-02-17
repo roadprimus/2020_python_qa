@@ -21,4 +21,9 @@ OBDB_GET_BREWERY = 'https://api.openbrewerydb.org/breweries/{brewery_id}'
 OBDB_SORT = (
     'https://api.openbrewerydb.org/breweries?by_city={sity}&sort={sign}id')
 
-JSONPLACEHOLDER_API_PATH = 'https://jsonplaceholder.typicode.com/'
+JSON_PH_API_PATH = 'https://jsonplaceholder.typicode.com/'
+JSON_PH_POSTS = JSON_PH_API_PATH + 'posts'
+JSON_PH_COMMENTS = JSON_PH_API_PATH + 'comments'
+JSON_PH_POSTS_BY_USER_ID = JSON_PH_POSTS + '?userId={user_id}'
+JSON_PH_COMMENTS_BY_POST_ID = JSON_PH_COMMENTS + '?postId={post_id}'
+JSON_PH_USERS = JSON_PH_API_PATH + 'users'

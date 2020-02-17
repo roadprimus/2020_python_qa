@@ -18,6 +18,10 @@ class Schema:
     MESSAGE_STRING - схема, когда 'message' - это строка.
     """
 
+    DIGIT_PATTERN = r'^-?\d+\.\d*$'
+    PHONE_PATTERN = r'^+?[\dx-]+$'
+    POSTAL_CODE_PATTERN = r'^\d+-?\d+$'
+
     LIST_ALL_BREEDS = {
         'type': 'object',
         'properties': {
@@ -78,20 +82,20 @@ class Schema:
             'id': {'type': 'number'},
             'latitude': {
                 'type': 'string',
-                'pattern': r'^-?\d+\.\d*$'
+                'pattern': DIGIT_PATTERN
             },
             'longitude': {
                 'type': 'string',
-                'pattern': r'^-?\d+\.\d*$'
+                'pattern': DIGIT_PATTERN
             },
             'name': {'type': 'string'},
             'phone': {
                 'type': 'string',
-                'pattern': r'^+?\d+$'
+                'pattern': PHONE_PATTERN
             },
             'postal_code': {
                 'type': 'string',
-                'pattern': r'^\d+-?\d+$'
+                'pattern': POSTAL_CODE_PATTERN
             },
             'state': {'type': 'string'},
             'street': {'type': 'string'},
@@ -110,10 +114,107 @@ class Schema:
         'items': OBDB_MAIN_ITEM
     }
 
+    JSON_PH_COMMENT_ITEMS = {
+        'type': 'object',
+        'property': {
+            'postId': {'type': 'number'},
+            'id': {'type': 'number'},
+            'name': {'type': 'string'},
+            'email': {
+                'type': 'string',
+                'format': 'email'
+            },
+            'body': {'type': 'string'}
+        }
+    }
+
+    JSON_PH_COMMENTS = {
+        'type': 'array',
+        'minItems': 0,
+        'items': JSON_PH_COMMENT_ITEMS
+    }
+
+    JSON_PH_POST_ITEMS = {
+        'type': 'object',
+        'property': {
+            'userId': {'type': 'number'},
+            'id': {'type': 'number'},
+            'title': {'type': 'string'},
+            'body': {'type': 'string'}
+        }
+    }
+
+    JSON_PH_POSTS = {
+        'type': 'array',
+        'minItems': 0,
+        'items': JSON_PH_POST_ITEMS
+    }
+
+    JSON_PH_USER_ITEMS = {
+        'type': 'object',
+        'property': {
+            'id': {'type': 'number'},
+            'name': {'type': 'string'},
+            'username': {'type': 'string'},
+            'email': {
+                'type': 'string',
+                'format': 'email'
+            },
+            'address': {
+                'type': 'object',
+                'property': {
+                    'street': {'type': 'string'},
+                    'suite': {'type': 'string'},
+                    'city': {'type': 'string'},
+                    'zipcode': {
+                        'type': 'string',
+                        'pattern': POSTAL_CODE_PATTERN
+                    },
+                    'geo': {
+                        'type': 'object',
+                        'property': {
+                            'lat': {
+                                'type': 'string',
+                                'pattern': DIGIT_PATTERN
+                            },
+                            'lng': {
+                                'type': 'string',
+                                'pattern': DIGIT_PATTERN
+                            }
+                        }
+                    },
+                }
+            },
+            'phone': {
+                'type': 'string',
+                'pattern': PHONE_PATTERN
+            },
+            'website': {'type': 'string'},
+            'company': {
+                'type': 'object',
+                'property': {
+                    'name': {'type': 'string'},
+                    'catchPhrase': {'type': 'string'},
+                    'bs': {'type': 'string'}
+                }
+            }
+        }
+    }
+
+    JSON_PH_USERS = {
+        'type': 'array',
+        'minItems': 0,
+        'items': JSON_PH_USER_ITEMS
+    }
+
 
 store = {
     # 'test_dog_api.py'
-    'api_path': [settings.DOG_API_PATH, settings.OBDB_API_PATH],
+    'api_path': [
+        settings.DOG_API_PATH,
+        settings.OBDB_API_PATH,
+        settings.JSON_PH_API_PATH
+    ],
     'api_random_img': [
         {
             'schema': Schema.MESSAGE_STRING,
@@ -202,5 +303,53 @@ store = {
                 ('Phoenix', choice([MINUS, PLUS])),
                 ('Tucson', choice([MINUS, PLUS]))
           )
+    ],
+    # 'test_jsonplaceholder.py'
+    'comments': [
+        {
+            'fxt': {
+                'schema': Schema.JSON_PH_COMMENTS,
+                'url': settings.JSON_PH_COMMENTS
+            }
+        }
+    ],
+    'comments_by_post_id': [
+        {
+            'post_id': post_id,
+            'fxt': {
+                'schema': Schema.JSON_PH_COMMENTS,
+                'url': (
+                    settings.JSON_PH_COMMENTS_BY_POST_ID.format(
+                        post_id=post_id)
+                )
+            }
+        } for post_id in (1, 2, 3, 4, 5)
+    ],
+    'posts': [
+        {
+            'fxt': {
+                'schema': Schema.JSON_PH_POSTS,
+                'url': settings.JSON_PH_POSTS
+            }
+        }
+    ],
+    'posts_by_user_id': [
+        {
+            'user_id': user_id,
+            'fxt': {
+                'schema': Schema.JSON_PH_POSTS,
+                'url': (
+                    settings.JSON_PH_POSTS_BY_USER_ID.format(user_id=user_id)
+                )
+            }
+        } for user_id in (1, 2, 3, 4, 5)
+    ],
+    'users': [
+        {
+            'fxt': {
+                'schema': Schema.JSON_PH_USERS,
+                'url': settings.JSON_PH_USERS
+            }
+        }
     ],
 }

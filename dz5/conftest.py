@@ -28,8 +28,16 @@ def pytest_generate_tests(metafunc):
         'get_brewery',
         'obdb_sort'
     ]
+    json_ph_fxt = [
+        'posts',
+        'comments',
+        'posts_by_user_id',
+        'comments_by_post_id',
+        'users'
+    ]
     fixtures.extend(dog_fxt)
     fixtures.extend(obdb_fxt)
+    fixtures.extend(json_ph_fxt)
     for name in fixtures:
         if name in metafunc.fixturenames:
             metafunc.parametrize(name, data[name])
