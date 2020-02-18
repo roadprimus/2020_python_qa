@@ -1,4 +1,5 @@
 """Здесь хранятся данные для тесов dz5."""
+from collections import namedtuple
 from random import choice
 
 from . import settings
@@ -7,6 +8,7 @@ from . import settings
 DOG_BREES = ('akita', 'hound', 'corgi', 'pointer')
 MINUS = '-'
 PLUS = ''
+UrlCode = namedtuple('UrlCode', ('url', 'status_code'))
 
 
 class Schema:
