@@ -2,12 +2,13 @@
 from collections import namedtuple
 from math import sqrt
 
-from Figure import Figure
+from .Figure import Figure
 
 
 TriangleSides = namedtuple('TriangleSides', ('a', 'b', 'c'))
 
 
+ANGLES = 3
 TRIANGLE_EXIST_ERROR = 'Треугольника с такими сторонами не существует.'
 
 
@@ -25,7 +26,7 @@ class Triangle(Figure):
             AssertionError: Если указанные стороны не образуют треугольник.
         """
         assert self.validate_triangle(r), TRIANGLE_EXIST_ERROR
-        self.angles = 3
+        self.angles = ANGLES
         self.name = name
         self.r = r
 

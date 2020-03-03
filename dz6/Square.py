@@ -1,5 +1,5 @@
 """Описание класса Rectangle."""
-from Rectangle import Rectangle, RectangleSides
+from .Rectangle import Rectangle, RectangleSides
 
 
 class Square(Rectangle):
@@ -10,7 +10,7 @@ class Square(Rectangle):
 
         Arg:
             r (float): Сторона квадрата.
-            name (str): Наименование кdflhfnf.
+            name (str): Наименование квадрата.
         """
         r = RectangleSides(r, r)
         super().__init__(r, name)

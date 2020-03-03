@@ -1,7 +1,11 @@
 """Описание класса Rectangles."""
 from collections import namedtuple
 
-from Figure import Figure
+from .Figure import Figure
+
+
+ANGLES = 4
+LENGTH_OF_SIDES_MUST_BE_GTE_0 = "Длина сторон должна быть больше или равна 0."
 
 
 RectangleSides = namedtuple('RectangleSides', ('a', 'b'))
@@ -17,7 +21,9 @@ class Rectangle(Figure):
             r (RectangleSides): Стороны прямоугольника.
             name (str): Наименование круга.
         """
-        self.angles = 4
+        assert self.validate_rectangle(r),\
+            LENGTH_OF_SIDES_MUST_BE_GTE_0
+        self.angles = ANGLES
         self.name = name
         self.r = r
 
@@ -30,6 +36,18 @@ class Rectangle(Figure):
     def perimeter(self):
         """Метод для вычисления периметра прямоугольника."""
         return self._calc_perimeter(self.r)
+
+    @staticmethod
+    def validate_rectangle(r):
+        """Проверка существования прямоугольника.
+
+        Arg:
+            r (RectangleSides): Стороны прямоугольника.
+
+        Returns:
+            bool: Существует ли треугольник.
+        """
+        return r.a >= 0 and r.b > 0
 
     @staticmethod
     def _calc_area(r):

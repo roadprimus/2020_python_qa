@@ -1,7 +1,11 @@
 """Описание класса Circle."""
 from math import pi
 
-from Figure import Figure
+from .Figure import Figure
+
+
+ANGLES = 0
+RADIUS_MUST_BE_GTE_0 = 'Радиус должен быть больше или равен 0.'
 
 
 class Circle(Figure):
@@ -14,7 +18,8 @@ class Circle(Figure):
             r (float): Радиус круга.
             name (str): Наименование круга.
         """
-        self.angles = 0
+        assert self.validate_circle(r), RADIUS_MUST_BE_GTE_0
+        self.angles = ANGLES
         self.name = name
         self.r = r
 
@@ -27,6 +32,18 @@ class Circle(Figure):
     def perimeter(self):
         """Метод для вычисления периметра круга."""
         return self._calc_perimeter(self.r)
+
+    @staticmethod
+    def validate_circle(r):
+        """Проверка что радиус больше или равен нулю.
+
+        Arg:
+            r (float): Радиус круга.
+
+        Returns:
+            bool: Радиус больше или равен нулю.
+        """
+        return r >= 0
 
     @staticmethod
     def _calc_area(r):
